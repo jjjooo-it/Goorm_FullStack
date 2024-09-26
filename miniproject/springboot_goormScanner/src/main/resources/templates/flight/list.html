@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>항공 리스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #002147; /* Dark navy background */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #002147;
+            color: #fff;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        form {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        form label {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        form input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            max-width: 200px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #005bb5; /* SkyScanner button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        form button:hover {
+            background-color: #004494; /* Slightly darker on hover */
+        }
+
+        table {
+            margin: 20px auto;
+            width: 90%;
+            border-collapse: collapse;
+            text-align: center;
+            background-color: #fff;
+            color: #333;
+        }
+
+        table th, table td {
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        table th {
+            background-color: #005bb5;
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        table td a {
+            color: #005bb5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        table td a:hover {
+            text-decoration: underline;
+        }
+
+        .sold-out {
+            background-color: #e0474c; /* Red background for sold out */
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a {
+            color: #005bb5;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #005bb5;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #004494;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>항공 리스트</h1>
+</header>
+
+<a th:href="@{/}">홈으로 가기</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>항공사</th>
+        <th>출발 시간</th>
+        <th>도착 시간</th>
+        <th>출발 공항</th>
+        <th>도착 공항</th>
+        <th>예약 가능 좌석</th>
+        <th>가격</th>
+        <th>상세 보기</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flight : ${flights}">
+        <td th:text="${flight.flightNumber}"></td>
+        <td th:text="${flight.airline}"></td>
+        <td th:text="${flight.departureTime}"></td>
+        <td th:text="${flight.arrivalTime}"></td>
+        <td th:text="${flight.departureAirport}"></td>
+        <td th:text="${flight.arrivalAirport}"></td>
+        <td th:if="${flight.availableSeats > 0}" th:text="${flight.availableSeats}"></td>
+        <td th:if="${flight.availableSeats == 0}">
+            <span class="sold-out">품절</span>
+        </td>
+        <td th:text="${flight.price}"></td>
+        <td><a th:href="@{/flights/{id}(id=${flight.flightId})}">자세히 보기</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

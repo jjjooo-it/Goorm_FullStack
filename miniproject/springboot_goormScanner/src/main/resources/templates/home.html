@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SkyScanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://mrwallpaper.com/images/hd/4k-plane-right-wing-2sa1gq7f2nthri22.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #fff;
+        }
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .user-info a, .user-info form, .admin-links a {
+            background: #0073e6;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .user-info a:hover, .user-info form:hover, .admin-links a:hover {
+            background: #005bb5;
+        }
+        .user-info form {
+            margin: 0;
+            background: none;
+            padding: 0;
+        }
+        .user-info input[type="submit"] {
+            background: #ff5a5f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .user-info input[type="submit"]:hover {
+            background: #e0474c;
+        }
+        .welcome-message {
+            font-size: 2.5em;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        .content {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .content h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        form label {
+            display: none; /* 숨김으로 인라인 스타일을 유지 */
+        }
+        form input[type="text"], form input[type="datetime-local"] {
+            margin: 0 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            width: 200px;
+        }
+        form button {
+            padding: 12px 20px;
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        form button:hover {
+            background-color: #005bb5;
+        }
+        .button {
+            padding: 12px 20px;
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Goorm Scanner</h1>
+</header>
+<div class="user-info" th:if="${username != null}">
+    <a th:href="@{/mypage}">마이페이지</a>
+    <a th:href="@{/admin/flights}" th:if="${isAdmin}">항공 관리</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+<div class="welcome-message" th:if="${username != null}">
+    <p>반가워요, <span th:text="${username}"></span>님!</p>
+</div>
+<div class="content">
+    <h2>항공권 검색</h2>
+    <form id="flightSearchForm" th:action="@{/flights/search}" method="get">
+        <input type="text" id="departureAirport" name="departureAirport" placeholder="출발지">
+        <input type="text" id="arrivalAirport" name="arrivalAirport" placeholder="도착지">
+        <input type="datetime-local" id="departureTime" name="departureTime" placeholder="출발 시간">
+        <input type="datetime-local" id="arrivalTime" name="arrivalTime" placeholder="도착 시간">
+        <button type="submit">검색하기</button>
+    </form>
+    <br>
+    <a th:href="@{/flights}" class="button">항공 보기</a>
+</div>
+
+<script>
+    document.getElementById('flightSearchForm').addEventListener('submit', function(event) {
+        var departureAirport = document.getElementById('departureAirport').value.trim();
+        var arrivalAirport = document.getElementById('arrivalAirport').value.trim();
+        var departureTime = document.getElementById('departureTime').value.trim();
+        var arrivalTime = document.getElementById('arrivalTime').value.trim();
+
+        if (!departureAirport || !arrivalAirport || !departureTime || !arrivalTime) {
+            event.preventDefault(); // 폼 제출을 막음
+            alert("모든 필드를 입력해 주세요 !!");
+        }
+    });
+</script>
+</body>
+</html>

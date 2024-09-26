@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>예약 확인 - 비행기표</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://cdn.pixabay.com/photo/2020/07/09/14/10/airport-5387490_1280.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ticket-container {
+            background-color: #ffffff;
+            padding: 30px; /* 상하좌우 10px씩 늘림 */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 720px; /* 가로 20px 늘림 */
+            max-width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            border: 3px solid #005bb5;
+        }
+
+        .ticket-info {
+            flex: 2;
+            border-right: 2px dashed #0073e6;
+            padding-right: 20px;
+            margin-right: 20px;
+        }
+
+        .ticket-info h1 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #0073e6;
+        }
+
+        .ticket-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .ticket-info p span {
+            font-weight: bold;
+        }
+
+        .ticket-action {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-left: 20px;
+        }
+
+        .ticket-action .button-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .barcode {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .barcode img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .barcode p {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0073e6;
+            padding-bottom: 10px;
+        }
+
+        .ticket-header img {
+            width: 50px;
+            height: auto;
+        }
+
+        .ticket-flight-info {
+            text-align: right;
+        }
+
+        .ticket-flight-info p {
+            margin: 2px 0;
+            font-size: 0.9em;
+        }
+
+        .ticket-flight-info p span {
+            font-weight: bold;
+        }
+
+        .back-link-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background-color: #005bb5;
+        }
+    </style>
+    <script>
+        function showAlert(message) {
+            if (message) {
+                alert(message);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="ticket-container">
+    <div class="ticket-info">
+        <div class="ticket-header">
+            <img src="https://statics.goorm.io/logo/goorm.svg" alt="Airline Logo">
+            <div class="ticket-flight-info">
+                <p>Flight No: <span th:text="${flight.flightNumber}">OKL012</span></p>
+                <p>Gate: <span>47</span></p>
+                <p>Seat: <span>24A</span></p>
+            </div>
+        </div>
+        <!-- 오류 메시지 경고 창 -->
+        <div th:if="${errorMessage != null}">
+            <script th:inline="javascript">
+                showAlert([[${errorMessage}]]);
+            </script>
+        </div>
+
+        <!-- 성공 메시지 -->
+        <div th:if="${successMessage != null}">
+            <script th:inline="javascript">
+                showAlert([[${successMessage}]]);
+            </script>
+        </div>
+        <h1 th:text="${flight.airline}">Urban Airline</h1>
+        <p>출발시간: <span th:text="${flight.departureTime}">11:30 AM</span></p>
+        <p>도착시간: <span th:text="${flight.arrivalTime}">02:30 PM</span></p>
+        <p>출발공항: <span th:text="${flight.departureAirport}">Canada Vancouver</span></p>
+        <p>도착공항: <span th:text="${flight.arrivalAirport}">Seoul Korea</span></p>
+        <p>예약 가능 좌석: <span th:text="${flight.availableSeats}">10</span></p>
+        <p>가격: <span th:text="${flight.price}">2000$</span></p>
+    </div>
+
+    <div class="ticket-action">
+        <div class="button-container">
+            <form th:action="@{/flights/{id}/book(id=${flight.flightId})}" method="post">
+                <button type="submit">예약하기</button>
+            </form>
+        </div>
+        <div class="barcode">
+            <img src="https://cdn.pixabay.com/photo/2015/03/21/09/34/qr-683354_1280.png" alt="Barcode">
+            <p>위의 큐알은 예시 이미지입니다.</p>
+        </div>
+    </div>
+</div>
+
+<div class="back-link-container">
+    <a th:href="@{/flights}" class="back-link">목록으로</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+	<title>자동차 상세</title>
+</head>
+<body>
+	<h1>자동차 상세</h1>
+	<div th:object="${car}">
+		<p th:text="*{model}"></p>
+		<p th:text="*{productionYear}"></p>
+		<p th:text="*{color}"></p>
+	</div>
+</body>
+</html>

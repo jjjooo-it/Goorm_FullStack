@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>새 글 작성</title>
+</head>
+<body>
+	<h1>새 글 작성</h1>
+	<form th:action="@{/posts/create}" method="post"
+		th:object="${post}">
+		<div>
+			<label for="content">Content:</label>
+			<input id="content" th:field="*{content}" required>
+		</div>
+		<button>작성</button>
+	</form>
+	<a href="/posts">글 목록을 돌아가기</a>
+</body>
+</html>

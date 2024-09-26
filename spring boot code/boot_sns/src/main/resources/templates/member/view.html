@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>멤버 자세히 보기</title>
+</head>
+<body>
+	<h1>멤버 상세 정보</h1>
+	<div th:if="${member != null}">
+		<p>Username: <span th:text="${member.username}"></span></p>
+		<p>Email: <span th:text="${member.email}"></span></p>
+		
+		<p>팔로워: <span th:text="${member.getFollowers().size()}">
+					</span></p>
+		<p>팔로잉: <span th:text="${member.getFollowing().size()}">
+					</span></p>
+		<form th:if="${session.loginMember != null
+			&& session.loginMember.id != member.id}"
+			method="post"
+			th:action="@{/follows/toggle/{followingId}
+						(followingId=${member.id})}">
+			<button th:text="${isFollowing ? '팔로우 취소' : '팔로우'}">팔로우</button>
+		</form>
+	</div>
+	
+	<h2>작성글</h2>
+	<div th:each="post : ${posts}">
+		<p th:text="${post.content}"></p>
+		<a th:href="@{/posts/{id}(id=${post.id})}">자세히 보기</a>
+	</div>
+	<a href="/members">멤버 리스트로 돌아가기</a>
+</body>
+</html>

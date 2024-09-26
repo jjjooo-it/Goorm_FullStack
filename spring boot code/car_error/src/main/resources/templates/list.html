@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+	<title>차량 목록</title>
+</head>
+<body>
+	<h1>차량 목록</h1>
+	<div th:each="car : ${cars}">
+		<p th:text="${car.model + ' ' + car.productionYear + ' ' + car.color}">
+	</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+-- 사용자 데이터 삽입
+INSERT INTO `user` (`user_name`, `email`, `password`)
+VALUES
+('User1', 'user1@example.com', 'password1'),
+('User2', 'user2@example.com', 'password2'),
+('User3', 'user3@example.com', 'password3'),
+('User4', 'user4@example.com', 'password4'),
+('User5', 'user5@example.com', 'password5'),
+('User6', 'user6@example.com', 'password6'),
+('User7', 'user7@example.com', 'password7'),
+('User8', 'user8@example.com', 'password8'),
+('User9', 'user9@example.com', 'password9'),
+('User10', 'user10@example.com', 'password10'),
+('User11', 'user11@example.com', 'password11'),
+('User12', 'user12@example.com', 'password12'),
+('User13', 'user13@example.com', 'password13'),
+('User14', 'user14@example.com', 'password14'),
+('User15', 'user15@example.com', 'password15'),
+('User16', 'user16@example.com', 'password16'),
+('User17', 'user17@example.com', 'password17'),
+('User18', 'user18@example.com', 'password18'),
+('User19', 'user19@example.com', 'password19'),
+('User20', 'user20@example.com', 'password20');
+
+-- 숙박 시설 데이터 삽입
+INSERT INTO `accommodation` (`name`, `location`, `room_type`, `room_count`, `price`)
+VALUES
+('Hotel A', 'New York', 'Single', 10, 100000),
+('Hotel B', 'Los Angeles', 'Double', 20, 200000),
+('Hotel C', 'Chicago', 'Suite', 15, 300000),
+('Hotel D', 'Houston', 'Single', 10, 100000),
+('Hotel E', 'Phoenix', 'Double', 20, 200000),
+('Hotel F', 'Philadelphia', 'Suite', 15, 300000),
+('Hotel G', 'San Antonio', 'Single', 10, 100000),
+('Hotel H', 'San Diego', 'Double', 20, 200000),
+('Hotel I', 'Dallas', 'Suite', 15, 300000),
+('Hotel J', 'San Jose', 'Single', 10, 100000),
+('Hotel K', 'Austin', 'Double', 20, 200000),
+('Hotel L', 'Jacksonville', 'Suite', 15, 300000),
+('Hotel M', 'Fort Worth', 'Single', 10, 100000),
+('Hotel N', 'Columbus', 'Double', 20, 200000),
+('Hotel O', 'San Francisco', 'Suite', 15, 300000),
+('Hotel P', 'Charlotte', 'Single', 10, 100000),
+('Hotel Q', 'Indianapolis', 'Double', 20, 200000),
+('Hotel R', 'Seattle', 'Suite', 15, 300000),
+('Hotel S', 'Denver', 'Single', 10, 100000),
+('Hotel T', 'Washington', 'Double', 20, 200000);
+
+-- 여가 활동 데이터 삽입
+INSERT INTO `leisure` (`name`, `type`, `description`, `price`)
+VALUES
+('Spa A', 'Relaxation', 'A relaxing spa experience', 50000),
+('Tour B', 'Adventure', 'An adventurous city tour', 70000),
+('Concert C', 'Entertainment', 'A live music concert', 60000),
+('Museum D', 'Education', 'A historical museum tour', 40000),
+('Theater E', 'Entertainment', 'A thrilling theater show', 80000),
+('Spa F', 'Relaxation', 'A calming spa session', 55000),
+('Tour G', 'Adventure', 'A hiking adventure', 75000),
+('Concert H', 'Entertainment', 'A rock music concert', 65000),
+('Museum I', 'Education', 'An art museum visit', 45000),
+('Theater J', 'Entertainment', 'A classical theater performance', 85000),
+('Spa K', 'Relaxation', 'A luxurious spa treatment', 60000),
+('Tour L', 'Adventure', 'A city bike tour', 70000),
+('Concert M', 'Entertainment', 'A jazz music concert', 70000),
+('Museum N', 'Education', 'A science museum tour', 50000),
+('Theater O', 'Entertainment', 'A comedy theater show', 90000),
+('Spa P', 'Relaxation', 'A rejuvenating spa session', 65000),
+('Tour Q', 'Adventure', 'A river rafting adventure', 80000),
+('Concert R', 'Entertainment', 'A pop music concert', 75000),
+('Museum S', 'Education', 'A technology museum visit', 55000),
+('Theater T', 'Entertainment', 'An opera show', 95000);
+
+-- 쿠폰 데이터 삽입
+INSERT INTO `coupon` (`code`, `discount`, `start_date`, `expire_date`)
+VALUES
+('DISCOUNT1', 0.1, '2024-01-01', '2024-12-31'),
+('DISCOUNT2', 0.15, '2024-03-01', '2024-03-31'),
+('DISCOUNT3', 0.2, '2024-07-01', '2024-12-31'),
+('DISCOUNT4', 0.1, '2024-05-04', '2024-05-16'),
+('DISCOUNT5', 0.15, '2024-12-24', '2025-01-10'),
+('DISCOUNT6', 0.2, '2024-07-01', '2024-08-31'),
+('DISCOUNT7', 0.1, '2024-03-12', '2024-10-30'),
+('DISCOUNT8', 0.15, '2024-09-05', '2024-09-20'),
+('DISCOUNT9', 0.2, '2024-04-04', '2024-12-01'),
+('DISCOUNT10', 0.1, '2024-03-09', '2024-06-01'),
+('DISCOUNT11', 0.15, '2024-01-16', '2024-03-31'),
+('DISCOUNT12', 0.2, '2024-01-11', '2024-11-11'),
+('DISCOUNT13', 0.1, '2024-07-07', '2024-08-08'),
+('DISCOUNT14', 0.15, '2024-06-11', '2024-11-01'),
+('DISCOUNT15', 0.2, '2024-10-01', '2024-10-21'),
+('DISCOUNT16', 0.1, '2024-05-08', '2024-11-02'),
+('DISCOUNT17', 0.15, '2024-01-01', '2025-12-31'),
+('DISCOUNT18', 0.2, '2024-12-01', '2025-01-31'),
+('DISCOUNT19', 0.1, '2024-03-31', '2025-03-31'),
+('DISCOUNT20', 0.15, '2024-02-01', '2024-05-31');
+
+-- 예약 데이터 삽입
+INSERT INTO `booking` (`accommodation_id`, `leisure_id`, `user_id`, `start_date`, `end_date`, `total_price`, `is_booked`, `coupon_id`)
+VALUES
+(1, null, 1, '2024-07-15', '2024-07-20', 150000, TRUE, 1),
+(2, null, 1, '2024-08-01', '2024-08-10', 270000, TRUE, null),
+(null, 3, 3, '2024-09-05', '2024-09-15', 320000, TRUE, 3),
+(null, 4, 9, '2024-10-01', '2024-10-05', 130000, TRUE, null),
+(5, null, 5, '2024-09-04', '2024-09-10', 290000, TRUE, null),
+(null, 6, 6, '2024-12-01', '2024-12-10', 310000, TRUE, 6),
+(7, null, 7, '2024-01-01', '2024-01-10', 140000, TRUE, 7),
+(7, null, 2, '2024-02-01', '2024-02-10', 280000, TRUE, null),
+(9, 9, 9, '2024-03-01', '2024-03-10', 350000, TRUE, 9),
+(null, 3, 3, '2024-04-01', '2024-04-10', 180000, TRUE, null),
+(7, null, 11, '2024-05-01', '2024-05-10', 180000, TRUE, 10);
+
+
+-- 결제 데이터 삽입 (할인율 적용)
+INSERT INTO `payment` (`booking_id`, `accommodation_id`, `leisure_id`, `user_id`, `total_price`, `is_completed`, `is_canceled`, `reg_date`)
+VALUES
+(1, 1, NULL, 1, 135000, TRUE, FALSE, '2024-07-14 14:32:00'), -- DISCOUNT1 (10%)
+(2, 2, NULL, 1, 270000, TRUE, FALSE, '2024-07-31 16:50:14'), -- No discount
+(3, NULL, 3, 3, 256000, TRUE, FALSE, '2024-09-04 11:11:00'), -- DISCOUNT3 (20%)
+(4, NULL, 4, 9, 130000, TRUE, FALSE, '2024-10-01 09:04:42'), -- No discount
+(5, 5, NULL, 5, 290000, TRUE, FALSE, '2024-10-31 18:10:12'), -- No discount
+(6, NULL, 6, 6, 248000, TRUE, FALSE, '2024-12-02 08:20:00'), -- DISCOUNT6 (20%)
+(7, 7, NULL, 7, 126000, TRUE, FALSE, '2023-12-31 20:32:05'), -- DISCOUNT7 (10%)
+(8, 7, NULL, 2, 280000, TRUE, FALSE, '2024-01-30 10:00:17'), -- No discount
+(9, 9, 9, 9, 280000, TRUE, FALSE, '2024-02-28 14:10:42'), -- DISCOUNT9 (20%)
+(10, NULL, 3, 3, 180000, TRUE, FALSE, '2024-04-02 12:50:50'), -- No discount
+(11, 7, NULL, 11, 162000, TRUE, FALSE, '2024-04-30 19:40:00'); -- DISCOUNT10 (10%)
+
+-- 장바구니 데이터 삽입
+INSERT INTO `cart` (`user_id`, `accommodation_id`, `leisure_id`)
+VALUES
+(3, null, 2),
+(4, null, 3),
+(4, 5, null),
+(5, null, 5),
+(7, null, 6),
+(7, 8, 1),
+(9, 9, 9),
+(10, null, 2),
+(11, null, 10);
+
+-- 위시리스트 데이터 삽입
+INSERT INTO `wish_list` (`user_id`, `accommodation_id`, `leisure_id`)
+VALUES
+(3, 3, null),
+(4, null, 2),
+(5, null, 3),
+(6, 6, null),
+(7, 7, 5),
+(8, null, 6),
+(9, 9, 2),
+(10, null, 1),
+(11, 11, 9);
+
+-- 리뷰 데이터 삽입
+INSERT INTO `review` (`leisure_id`, `accommodation_id`, `content`, `user_id`)
+VALUES
+(3, null, 'Amazing place!', 3),
+(4, null, 'Wonderful stay!', 4),
+(null, 5, 'Highly recommend!', 5),
+(null, 6, 'Loved it!', 6),
+(7, 7, 'Fantastic service!', 7),
+(8, null, 'Great location!', 8),
+(4, null, 'Very comfortable!', 9),
+(10, null, 'Excellent!', 10),
+(null, 11, 'Memorable experience!', 11);

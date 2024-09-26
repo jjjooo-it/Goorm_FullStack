@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>항공편 리스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #005bb5;
+        }
+
+        .actions {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .actions button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .actions button:hover {
+            background-color: #005bb5;
+        }
+
+        .actions a {
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1200px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background-color: #0073e6;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            font-size: 1.1em;
+        }
+
+        table th:nth-child(10), /* 수정 열 */
+        table th:nth-child(11), /* 삭제 열 */
+        table td:nth-child(10), /* 수정 열 */
+        table td:nth-child(11)  /* 삭제 열 */ {
+            width: 120px; /* 너비를 넉넉히 설정하여 버튼 글자가 수평으로 정렬되도록 함 */
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .edit-button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            padding: 8px 12px;
+            background-color: #e0474c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        form {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1>항공편 리스트</h1>
+
+<div class="actions">
+    <a th:href="@{/admin/flights/add}">
+        <button>새 항공권 추가</button>
+    </a>
+    <a th:href="@{/}"><button>뒤로 가기</button></a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>항공편 ID</th>
+        <th>항공편 번호</th>
+        <th>항공사</th>
+        <th>출발 공항</th>
+        <th>도착 공항</th>
+        <th>출발 시간</th>
+        <th>도착 시간</th>
+        <th>예약 가능 좌석</th>
+        <th>가격</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flight : ${flights}">
+        <td th:text="${flight.flightId}"></td>
+        <td th:text="${flight.flightNumber}"></td>
+        <td th:text="${flight.airline}"></td>
+        <td th:text="${flight.departureAirport}"></td>
+        <td th:text="${flight.arrivalAirport}"></td>
+        <td th:text="${flight.departureTime}"></td>
+        <td th:text="${flight.arrivalTime}"></td>
+        <td th:text="${flight.availableSeats}"></td>
+        <td th:text="${flight.price}"></td>
+        <td>
+            <a th:href="@{/admin/flights/edit/{flightId}(flightId=${flight.flightId})}">
+                <button type="button" class="edit-button">수정</button>
+            </a>
+        </td>
+        <td>
+            <form th:action="@{/admin/flights/delete/{flightId}(flightId=${flight.flightId})}" method="post"
+                  onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                <button type="submit" class="delete-button">삭제</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

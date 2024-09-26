@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <title>서울시 공공자전거 실시간 대여정보</title>
+  <style>
+    .wrap { position: absolute; left: 0; bottom: 50px; margin-left: -144px; text-align: left; overflow: hidden; font-size: 12px; font-family: 'Malgun Gothic', dotum, '돋움', sans-serif; line-height: 1.5; } 
+    .wrap * { padding: 0; margin: 0; } 
+    .wrap .info {border-radius: 5px; border-bottom: 2px solid #ccc; border-right: 1px solid #ccc; overflow: hidden; background: #fff; } 
+    .wrap .info:nth-child(1) { border: 0; box-shadow: 0px 1px 2px #888; } 
+    .info .title { padding: 5px 0 0 10px; background: #eee; border-bottom: 1px solid #ddd; font-weight: bold; } 
+    .info .body { position: relative; overflow: hidden; } 
+    .info .desc { position: relative; margin: 0px 10px 0 10px; } 
+    .desc .ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+    .info:after {content: '';position: absolute; margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e3f2fd;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar-brand img {
+      margin-right: 10px;
+    }
+
+    .container-custom {
+      display: flex;
+    }
+
+    .card-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-right: 20px;
+      max-height: 650px;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    .search-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      margin: 0 auto;
+    }
+
+    .form-control {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    .btn-custom {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 70px;
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-light">
+    <div class="container-fluid d-flex justify-content-center">
+      <p class="navbar-brand m-0">
+        <img src="assets/cycle.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+        서울시 공공자전거 실시간 대여정보
+      </p>
+    </div>
+    <form class="search-form" onsubmit="SearchMap(event)">
+      <input id="search-input" class="form-control" type="search" placeholder="주소를 입력하세요(ex.강남)" aria-label="Search" />
+      <button class="btn btn-custom" type="submit">검색</button>
+    </form>
+  </nav>
+
+  <div class="container mt-4 container-custom">
+    <div id="card-container" class="card-container"></div>
+    <div id="map" style="width: 100%; height: 650px"></div>
+  </div>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=998a412d2df524401c066563a0f55052&libraries=services,clusterer"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

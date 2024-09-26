@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>구름이네 간식창고 - 마이페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background-image: url('https://cdn.pixabay.com/photo/2016/02/19/11/23/sunset-1207326_1280.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #005bb5;
+            font-size: 2.5em;
+        }
+
+        table {
+            width: 50%; /* 표 너비를 줄임 */
+            max-width: 800px; /* 최대 너비를 설정 */
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        table th {
+            background-color: #0073e6; /* 파란색 배경 */
+            color: #fff;
+            padding: 15px;
+            text-align: left; /* 텍스트를 왼쪽 정렬 */
+            font-size: 1.1em;
+            width: 200px; /* 열 너비를 일정하게 설정 */
+        }
+
+        table td {
+            padding: 15px;
+            text-align: left; /* 텍스트를 왼쪽 정렬 */
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 10px; /* 위쪽 마진을 줄임 */
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            background-color: #005bb5;
+        }
+
+        .actions {
+            width: 50%;
+            max-width: 800px; /* 최대 너비를 설정하여 표에 맞춤 */
+            display: flex;
+            justify-content: flex-end; /* 왼쪽으로 정렬 */
+            margin-bottom: 10px; /* 아래쪽 마진을 줄임 */
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .actions a:hover {
+            background-color: #005bb5;
+        }
+
+        .role-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .role-user {
+            background-color: #28a745; /* 초록색 */
+        }
+
+        .role-admin {
+            background-color: #dc3545; /* 빨간색 */
+        }
+    </style>
+</head>
+<body>
+<h1>마이페이지</h1>
+
+<div class="actions">
+    <a th:href="@{/}">뒤로 가기</a>
+</div>
+
+<table>
+    <tbody>
+    <tr th:each="member : ${members}">
+        <th>한국이름</th>
+        <td th:text="${member.koName}"></td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>영어이름</th>
+        <td th:text="${member.enName}"></td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>핸드폰 번호</th>
+        <td th:text="${member.mobile}"></td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>이메일</th>
+        <td th:text="${member.email}"></td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>성별</th>
+        <td th:text="${member.gender}"></td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>권한</th>
+        <td>
+            <span th:if="${member.role == 'ROLE_USER'}" class="role-button role-user">유저</span>
+            <span th:if="${member.role == 'ROLE_ADMIN'}" class="role-button role-admin">어드민</span>
+        </td>
+    </tr>
+    <tr th:each="member : ${members}">
+        <th>예약 내역</th>
+        <td>
+            <a th:href="@{/bookings/my}">나의 예약</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

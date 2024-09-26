@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>댓글 리스트</title>
+</head>
+<body>
+	<h1>댓글 리스트</h1>
+	
+	<div th:each="comment : ${comments}">
+		<p th:text="${comment.content}"></p>
+		by <small th:text="${comment.member.username}"></small>
+		<a th:if="${session.loginMember != null
+		&& session.loginMember.id == comment.member.id}"
+		th:href="@{/comments/delete/{id}(id=${comment.id})}">삭제</a>		
+	</div>
+	
+	<form th:if="${session.loginMember != null}"
+		th:action="@{/comments/create}" method="post"
+	>
+		<input type="hidden" name="postId" th:value="${postId}">
+		<textarea name="content" required></textarea>
+		<button>댓글 제출</button>
+	</form>
+
+	<a th:href="@{/posts/{id}(id=${postId})}">게시물로 돌아가기</a>
+</body>
+</html>

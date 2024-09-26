@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${flight.flightId != null} ? '항공편 수정' : '새 항공편 추가'">항공편 관리</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #0073e6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            min-width: 300px;
+            box-sizing: border-box;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #0073e6;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        a {
+            color: #0073e6;
+            text-decoration: none;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${flight.flightId != null} ? '항공편 수정' : '새 항공편 추가'"></h1>
+<form th:action="${flight.flightId != null} ? @{/admin/flights/edit/{flightId}(flightId=${flight.flightId})} : @{/admin/flights/add}"
+      th:object="${flight}" method="post">
+
+    <input type="hidden" th:field="*{flightId}" />
+
+    <div>
+        <label for="flightNumber">Flight Number:</label>
+        <input type="text" id="flightNumber" th:field="*{flightNumber}" required>
+    </div>
+    <div>
+        <label for="airline">Airline:</label>
+        <input type="text" id="airline" th:field="*{airline}" required>
+    </div>
+    <div>
+        <label for="departureAirport">Departure Airport:</label>
+        <input type="text" id="departureAirport" th:field="*{departureAirport}" required>
+    </div>
+    <div>
+        <label for="arrivalAirport">Arrival Airport:</label>
+        <input type="text" id="arrivalAirport" th:field="*{arrivalAirport}" required>
+    </div>
+    <div>
+        <label for="departureTime">Departure Time:</label>
+        <input type="datetime-local" id="departureTime" th:field="*{departureTime}" required>
+    </div>
+    <div>
+        <label for="arrivalTime">Arrival Time:</label>
+        <input type="datetime-local" id="arrivalTime" th:field="*{arrivalTime}" required>
+    </div>
+    <div>
+        <label for="availableSeats">Available Seats:</label>
+        <input type="number" id="availableSeats" th:field="*{availableSeats}" required>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" required>
+    </div>
+
+    <div>
+        <button type="submit" th:text="${flight.flightId != null} ? '수정' : '추가'"></button>
+    </div>
+</form>
+
+<a href="/admin/flights">항공권 목록으로 돌아가기</a>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약한 항공 리스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background-image: url('https://cdn.pixabay.com/photo/2017/06/29/16/30/wing-2452065_1280.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #005bb5;
+            font-size: 2.5em;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1200px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #0073e6;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            font-size: 1.1em;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .home-link {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .home-link:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+<h1>예약한 항공 리스트</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>항공사</th>
+        <th>출발 시간</th>
+        <th>도착 시간</th>
+        <th>출발 공항</th>
+        <th>도착 공항</th>
+        <th>예약 가능 좌석</th>
+        <th>가격</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flight : ${bookings}">
+        <td th:text="${flight.flightNumber}"></td>
+        <td th:text="${flight.airline}"></td>
+        <td th:text="${flight.departureTime}"></td>
+        <td th:text="${flight.arrivalTime}"></td>
+        <td th:text="${flight.departureAirport}"></td>
+        <td th:text="${flight.arrivalAirport}"></td>
+        <td th:text="${flight.availableSeats}"></td>
+        <td th:text="${flight.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}" class="home-link">홈으로 가기</a>
+</body>
+</html>

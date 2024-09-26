@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시글 자세히 보기</title>
+</head>
+<body>
+	<h1>게시글 자세히 보기</h1>
+	<div th:if="${post != null}">
+	<p th:text="${post.content}"></p>
+	<p>작성자 :
+		<a th:href="@{/members/{id}(id=${post.author.id})}"
+		th:text="${post.author.username}"></a></p>
+	
+	<p> 좋아요: <span th:text="${post.likes.size()}"></span></p>
+	
+	<form th:if="${session.loginMember != null}"
+		th:action="@{/likes/toggle/{postId}(postId=${post.id})}"
+		method="post">
+		<button th:text="${isLiked ? '좋아요 취소' : '좋아요'}"></button>
+	</form>
+	
+	<a th:href="@{/comments/post/{id}(id=${post.id})}">
+	댓글 보기</a>	
+	</div>
+	<a href="/posts">게시글 리스트로 돌아가기</a>
+</body>
+</html>
